@@ -57,6 +57,7 @@ trait ApplicativeError[F[_], E] extends Applicative[F] {
    * res1: ErrorOr[Int] = Left(division by zero)
    * }}}
    */
+  // MEMO: このTraitは、ひとまずraiseErrorを実装するだけでいい？
   def raiseError[A](e: E): F[A]
 
   /**

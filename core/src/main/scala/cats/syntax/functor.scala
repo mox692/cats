@@ -22,6 +22,8 @@
 package cats
 package syntax
 
+// MEMO: Functor.ToFunctorOps のOpsをさらに拡張した感じか
+//       cats.syntax は cats.Ops をさらに拡張した感じかな？
 trait FunctorSyntax extends Functor.ToFunctorOps {
   implicit final def catsSyntaxFunctorTuple2Ops[F[_], A, B](fab: F[(A, B)]): FunctorTuple2Ops[F, A, B] =
     new FunctorTuple2Ops[F, A, B](fab)
