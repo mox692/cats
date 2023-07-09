@@ -29,6 +29,7 @@ import Prop._
 trait FunctorTests[F[_]] extends InvariantTests[F] {
   def laws: FunctorLaws[F]
 
+  // MEMO: covariantComposition をcheckするのに,B, Cの型を使う.
   def functor[A: Arbitrary, B: Arbitrary, C: Arbitrary](implicit
     ArbFA: Arbitrary[F[A]],
     CogenA: Cogen[A],
@@ -40,6 +41,7 @@ trait FunctorTests[F[_]] extends InvariantTests[F] {
     new DefaultRuleSet(
       name = "functor",
       parent = Some(invariant[A, B, C]),
+      // MEMO: ここが具体的な props
       "covariant identity" -> forAll(laws.covariantIdentity[A] _),
       "covariant composition" -> forAll(laws.covariantComposition[A, B, C] _)
     )
